@@ -7,11 +7,25 @@ import { forkJoin, of } from 'rxjs';
 import * as _ from 'lodash-es';
 import { themeObject, stageObject, questionSetObject, questionObject, questionSetConfigCdataObject } from './data';
 import { UUID } from 'angular2-uuid';
+import { HttpClient } from  "@angular/common/http";
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class CbseProgramService {
-  constructor(private configService: ConfigService, public actionService: ActionService, public telemetryService: TelemetryService, public toasterService: ToasterService) { }
+
+  constructor(private httpClient: HttpClient, private configService: ConfigService, public actionService: ActionService,
+    public toasterService: ToasterService, public telemetryService: TelemetryService) { }
+
+  public postCertData(file: any, certType: any, userId: any, rootOrgId: any, certKeys): Observable<any> {
+    let formData = new FormData();
+    formData.append('users', file);
+    formData.append('cert-type', certType);
+    formData.append('userId', userId);
+    formData.append('rootOrgId', rootOrgId);
+    formData.append('certKey', certKeys);
+    return this.httpClient.post('/certificate/user/upload', formData);
+  }
 
   getQuestionDetails(questionId) {
     const req = {
@@ -23,7 +37,7 @@ export class CbseProgramService {
   getQuestionPluginConfig(res, questionSetConfigCdata, collections, role) {
     const question = _.cloneDeep(questionObject);
     const questionConfigCdata: any = {};
-    question.id = UUID.UUID();
+    question.id = res.result.assessment_item.identifier || UUID.UUID();
     questionConfigCdata.question = _.get(res, 'result.assessment_item.body');
     const media = _.map(_.get(res, 'result.assessment_item.media'), (mediaObj) => {
       delete mediaObj.baseUrl;

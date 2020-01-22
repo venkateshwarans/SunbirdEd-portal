@@ -65,6 +65,7 @@ let envVariables = {
   },
   sunbird_google_captcha_site_key: env.sunbird_google_captcha_site_key,
   sunbird_azure_report_container_name: env.sunbird_azure_report_container_name || 'reports',
+  sunbird_azure_certificates_container_name: env.sunbird_azure_certificates_container_name || 'cert-gj',
   sunbird_azure_account_name: env.sunbird_azure_account_name,
   sunbird_azure_account_key: env.sunbird_azure_account_key,
   sunbird_portal_health_check_enabled: env.sunbird_health_check_enable || 'true',
@@ -74,7 +75,9 @@ let envVariables = {
   sunbird_portal_player_cdn_url: env.sunbird_portal_player_cdn_url,
   sunbird_processing_kafka_host: process.env.sunbird_processing_kafka_host,
   sunbird_sso_kafka_topic: process.env.sunbird_sso_kafka_topic,
-  cbse_programId: process.env.cbse_programId
+  sunbird_environment_base_url:env.sunbird_environment_base_url || 'https://preprod.ntp.net.in',
+  cbse_programId: process.env.cbse_programId,
+  sunbird_azure_certificates_container_name: env.sunbird_azure_certificates_container_name || 'cert-gj',
 }
 
 envVariables.PORTAL_CASSANDRA_URLS = (env.sunbird_cassandra_urls && env.sunbird_cassandra_urls !== '')

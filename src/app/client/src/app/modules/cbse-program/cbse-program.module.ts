@@ -13,20 +13,16 @@ import { TextbookListComponent } from './components/textbook-list/textbook-list.
 import { TelemetryModule } from '@sunbird/telemetry';
 import { PlayerHelperModule } from '@sunbird/player-helper';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RecursiveTreeComponent } from './components/recursive-tree/recursive-tree.component';
-import { ContentUploaderComponent } from './components/content-uploader/content-uploader.component';
-import { ResourceTemplateComponent } from './components/resource-template/resource-template.component';
-import { DynamicModule } from 'ng-dynamic-component';
-import { CommonConsumptionModule } from '@project-sunbird/common-consumption';
-import { CollectionComponent } from './components/collection/collection.component';
-
-
+import { CsvUploadComponent } from './components/csv-upload/csv-upload.component';
+import { CertificateModule } from './../certificate/certificate.module';
+import { CertificateDashboardComponent } from './components/certificate-dashboard/certificate-dashboard.component';
 @NgModule({
-  declarations: [QuestionListComponent, SelectTextbookComponent, CbseComponent, QuestionCreationComponent, ChapterListComponent,
+  declarations: [CsvUploadComponent, QuestionListComponent, SelectTextbookComponent, CbseComponent, QuestionCreationComponent,
+    ChapterListComponent,
     McqCreationComponent, CkeditorToolComponent ,
     McqTemplateSelectionComponent,
-    QuestionPreviewComponent, SanitizeHtmlPipe, QuestionCreationHeaderComponent,
-    TextbookListComponent, DashboardComponent, RecursiveTreeComponent, ContentUploaderComponent, ResourceTemplateComponent, CollectionComponent],
+    QuestionPreviewComponent, SanitizeHtmlPipe, QuestionCreationHeaderComponent, TextbookListComponent, DashboardComponent,
+    CertificateDashboardComponent],
   imports: [
     CommonModule,
     SuiTabsModule,
@@ -36,13 +32,7 @@ import { CollectionComponent } from './components/collection/collection.componen
     InfiniteScrollModule,
     PlayerHelperModule,
     TelemetryModule,
-    DynamicModule.withComponents([QuestionListComponent, SelectTextbookComponent,
-       QuestionCreationComponent, ChapterListComponent,
-      McqCreationComponent, CkeditorToolComponent ,
-      McqTemplateSelectionComponent,
-      QuestionPreviewComponent, QuestionCreationHeaderComponent,
-      TextbookListComponent, DashboardComponent, RecursiveTreeComponent, ContentUploaderComponent, ResourceTemplateComponent]),
-
+    CertificateModule
   ],
   exports: [ CbseComponent, SanitizeHtmlPipe ]
 })
